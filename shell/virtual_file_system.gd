@@ -7,46 +7,65 @@ var file_system: File
 
 # Classe que representa um arquivo ou diretório
 class File:
-	var name: String
+	var file_name: String
 	var content: String
 	var is_dir: bool
 	var links: Array[File]
 
-	func _init(name: String = "", content: String = "", is_dir: bool = false, links: Array[File] = []):
-		self.name = name
-		self.content = content
-		self.is_dir = is_dir
-		self.links = links
+	func _init(_file_name: String, _content: String, _is_dir: bool, _links: Array[File]):
+		self.file_name = _file_name
+		self.content = _content
+		self.is_dir = _is_dir
+		self.links = _links
 
 # Inicialização do sistema de arquivos virtual
-func _init(level_path: String):
-	self.level_path = level_path
-	self.file_system = File.new("root", "", true, [])
+func _init(_level_path: String):
+	self.level_path = _level_path
+	self.file_system = _build_fs(level_path)
+	file_system.file_name = "root"
+	print(_print_tree(file_system))
 
-# Quando o nó entra na árvore de cena
-func _ready() -> void:
-	print("Sistema de Arquivos Virtual Pronto")
-	print("Estrutura Inicial:", _print_tree(file_system))
+# Constrói a árvore do sistema de arquivos com base no diretório real
+func _build_fs(_level_path: String) -> File:
+	var root = File.new(_level_path.get_file(), "", true, [])
+	var root_dir = DirAccess.open(_level_path)
+	if root_dir == null:
+		print("Erro: Não foi possível abrir o diretório ", _level_path)
+		return root
 
-# Função para criar um arquivo ou diretório
-func create(name: String, is_dir: bool, path: Array[String]) -> bool:
+	var all_files = root_dir.get_files()
+	var all_dir = root_dir.get_directories()
+	for file in all_files:
+		root.links.append(File.new(file, _read_file_content(file), false, []))
+		
+	for dir in all_dir:
+		root.links.append(_build_fs(_level_path.path_join(dir)))
+	
+	return root
+
+# Função para ler o conteúdo de um arquivo
+func _read_file_content(file_path: String) -> String:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if file == null:
+		return "" # Retorna vazio se não for possível abrir
+	var content = file.get_as_text()
+	file.close()
+	return content
+
+# Função para listar o conteúdo de um diretório
+func list(path: Array[String]) -> Array[String]:
 	var current_dir = _navigate_to(path)
 	if current_dir == null:
 		print("Caminho inválido")
-		return false
-
-	if not current_dir.is_dir:
-		print("O destino não é um diretório")
-		return false
-
-	for link in current_dir.links:
-		if link.name == name:
-			print("Arquivo/Diretório já existe")
-			return false
-
-	var new_file = File.new(name, "", is_dir, [])
-	current_dir.links.append(new_file)
-	return true
+		return []
+		
+	var result = []
+	for file in current_dir.links:
+		var file_name = file.file_name
+		if file.is_dir:
+			file_name += "/"
+		result.append(file_name)
+	return result
 
 # Função para encontrar um arquivo/diretório com base no caminho
 func _navigate_to(path: Array[String]) -> File:
@@ -62,69 +81,9 @@ func _navigate_to(path: Array[String]) -> File:
 			return null
 	return current_dir
 
-# Função para listar o conteúdo de um diretório
-func list(path: Array[String]) -> Array[String]:
-	var current_dir = _navigate_to(path)
-	if current_dir == null:
-		print("Caminho inválido")
-		return []
-		
-	var result = []
-	for file in current_dir.links:
-		var name = file.name
-		if file.is_dir:
-			name += "/"
-		result.append(name)
-	return result
-
-
-
-# Função para deletar um arquivo/diretório
-func delete(name: String, path: Array[String]) -> bool:
-	var current_dir = _navigate_to(path)
-	if current_dir == null:
-		print("Caminho inválido")
-		return false
-
-	for i in range(current_dir.links.size()):
-		if current_dir.links[i].name == name:
-			current_dir.links.remove_at(i)
-			return true
-	print("Arquivo/Diretório não encontrado")
-	return false
-
-# Função para escrever conteúdo em um arquivo
-func write(name: String, content: String, path: Array[String]) -> bool:
-	var current_dir = _navigate_to(path)
-	if current_dir == null:
-		print("Caminho inválido")
-		return false
-
-	for file in current_dir.links:
-		if file.name == name and not file.is_dir:
-			file.content = content
-			return true
-
-	print("Arquivo não encontrado ou é um diretório")
-	return false
-
-# Função para ler conteúdo de um arquivo
-func read(name: String, path: Array[String]) -> String:
-	var current_dir = _navigate_to(path)
-	if current_dir == null:
-		print("Caminho inválido")
-		return ""
-
-	for file in current_dir.links:
-		if file.name == name and not file.is_dir:
-			return file.content
-
-	print("Arquivo não encontrado ou é um diretório")
-	return ""
-
 # Função para imprimir a árvore do sistema de arquivos
 func _print_tree(node: File, depth: int = 0) -> String:
-	var result = "  ".repeat(depth) + (node.name + "/" if node.is_dir else node.name) + "\n"
+	var result = "  ".repeat(depth) + (node.file_name + "/" if node.is_dir else node.file_name) + "\n"
 	for link in node.links:
 		result += _print_tree(link, depth + 1)
 	return result
