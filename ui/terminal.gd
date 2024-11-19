@@ -13,7 +13,7 @@ func _ready():
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !Global.on_fps_view:
-		match event.keycode:
+		match event.get_keycode_with_modifiers():
 			KEY_ENTER:
 				remove_last_caret()
 				if command_buffer.length() > 0:
@@ -36,15 +36,15 @@ func _input(event):
 				update_caret(".")
 			KEY_COMMA:
 				update_caret(",")
-			_:
-				if event.keycode == clamp(event.keycode, 64, 90) or event.keycode == clamp(event.keycode, 48, 57):
-					update_caret(OS.get_keycode_string(event.keycode))
-					
-				if Input.is_action_pressed("pipe"):
-					update_caret("|")
-				
-				if Input.is_action_just_pressed("underscore"):
-					update_caret("_")
+
+		if event.keycode == clamp(event.keycode, 64, 90) or event.keycode == clamp(event.keycode, 48, 57):
+			update_caret(OS.get_keycode_string(event.keycode))
+
+		if Input.is_action_pressed("pipe"):
+			update_caret("|")
+
+		if Input.is_action_just_pressed("underscore"):
+			update_caret("_")
 		limit_text()
 		scroll_to_bottom()
 
