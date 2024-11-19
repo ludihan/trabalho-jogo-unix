@@ -1,47 +1,23 @@
 class_name VirtualFileSystem
 extends Node
 
-<<<<<<< HEAD
-var level_path: String
-var file_system: File
-
-=======
 # Caminho inicial do sistema de arquivos virtual
 var level_path: String
 var file_system: File
 
 # Classe que representa um arquivo ou diretório
->>>>>>> a5dbb50 (vfs: script base criado)
 class File:
 	var name: String
 	var content: String
 	var is_dir: bool
 	var links: Array[File]
-<<<<<<< HEAD
-	
-	func _init(name: String, content: String, is_dir: bool, links: Array[File]) -> void:
-=======
 
 	func _init(name: String = "", content: String = "", is_dir: bool = false, links: Array[File] = []):
->>>>>>> a5dbb50 (vfs: script base criado)
 		self.name = name
 		self.content = content
 		self.is_dir = is_dir
 		self.links = links
 
-<<<<<<< HEAD
-func _init(level_path: String):
-	self.level_path = level_path
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-=======
 # Inicialização do sistema de arquivos virtual
 func _init(level_path: String):
 	self.level_path = level_path
@@ -152,4 +128,3 @@ func _print_tree(node: File, depth: int = 0) -> String:
 	for link in node.links:
 		result += _print_tree(link, depth + 1)
 	return result
->>>>>>> a5dbb50 (vfs: script base criado)
