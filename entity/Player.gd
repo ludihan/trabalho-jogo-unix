@@ -23,7 +23,7 @@ func _input(event):
 		# Clamp the camera's x rotation to prevent flipping over
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Calculate movement direction based on input
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction = (head.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

@@ -1,6 +1,5 @@
 extends TextEdit
 
-const ROOT_DIR := "res://level/root"
 const MAX_LINES: int = 50
 const CARET: String = "█"
 var current_directory: String = "."
@@ -9,7 +8,6 @@ var sh: Shell = Shell.new()
 
 
 func _ready():
-	current_directory = ROOT_DIR
 	prepare_prompt()
 
 
@@ -34,12 +32,13 @@ func _input(event):
 				remove_last_caret()
 				command_buffer += " "
 				self.text += " " + CARET
+			KEY_PERIOD:
+				update_caret(".")
+			KEY_COMMA:
+				update_caret(",")
 			_:
 				if event.keycode == clamp(event.keycode, 64, 90) or event.keycode == clamp(event.keycode, 48, 57):
 					update_caret(OS.get_keycode_string(event.keycode))
-				
-				if event.keycode == KEY_PERIOD:
-					update_caret(".")
 					
 				if Input.is_action_pressed("pipe"):
 					update_caret("|")

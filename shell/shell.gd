@@ -1,7 +1,7 @@
 class_name Shell
 extends Node
 
-@export var level_path := "res://level/level1_root/"
+@export var level_path := "res://level/level1_root"
 @onready var vsf: VirtualFileSystem = VirtualFileSystem.new(level_path)
 
 enum TerminationStatus {
@@ -13,10 +13,12 @@ class CommandResult:
 	var output: String
 	var termination_status: TerminationStatus
 	
-	func _init(output: String, termination_status: TerminationStatus) -> void:
-		self.output = output
-		self.termination_status = termination_status
+	func _init(_output: String, _termination_status: TerminationStatus) -> void:
+		self.output = _output
+		self.termination_status = _termination_status
 
+func _init() -> void:
+	vsf = VirtualFileSystem.new(level_path)
 
 func execute(commands: String) -> CommandResult:
 	var prepared_commands = prepare_commands(commands)
