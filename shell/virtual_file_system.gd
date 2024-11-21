@@ -3,6 +3,7 @@ extends Node
 
 var level_path: String
 var file_system: File
+var current_dir = "/"
 
 class File:
 	var file_name: String
@@ -36,7 +37,6 @@ func _build_fs(_level_path: String) -> File:
 		
 	for dir in all_dir:
 		root.links.append(_build_fs(_level_path.path_join(dir)))
-	
 	return root
 
 func _read_file_content(file_path: String) -> String:
@@ -47,35 +47,14 @@ func _read_file_content(file_path: String) -> String:
 	file.close()
 	return content
 
-func list(path: Array[String]) -> Array[String]:
-	var current_dir = _navigate_to(path)
-	if current_dir == null:
-		print("Caminho inválido")
-		return []
-		
-	var result = []
-	for file in current_dir.links:
-		var file_name = file.file_name
-		if file.is_dir:
-			file_name += "/"
-		result.append(file_name)
-	return result
-
-func _navigate_to(path: Array[String]) -> File:
-	var current_dir = file_system
-	for dir_name in path:
-		var found = false
-		for link in current_dir.links:
-			if link.name == dir_name and link.is_dir:
-				current_dir = link
-				found = true
-				break
-		if not found:
-			return null
-	return current_dir
-
 func _print_tree(node: File, depth: int = 0) -> String:
 	var result = "  ".repeat(depth) + (node.file_name + "/" if node.is_dir else node.file_name) + "\n"
 	for link in node.links:
 		result += _print_tree(link, depth + 1)
 	return result
+
+func navigate_to(path: String):
+	pass
+
+func read_from(path: String):
+	pass

@@ -23,7 +23,7 @@ func _init() -> void:
 func execute(commands: String) -> CommandResult:
 	var prepared_commands = prepare_commands(commands)
 	print(prepared_commands)
-	var commands_exist := all_commands_exist(prepared_commands)
+	var commands_exist := check_commands(prepared_commands)
 	if commands_exist.termination_status == TerminationStatus.EXIT_FAILURE:
 		return commands_exist
 
@@ -55,19 +55,23 @@ func command_not_found(command: String) -> String:
 	return "DSH: %s: COMMAND NOT FOUND\n" % command
 
 
-func all_commands_exist(command: Array) -> CommandResult:
+func check_commands(command: Array) -> CommandResult:
 	var exists := true
 	var errors: String = ""
+	var incomplete_pipe := false
 	for i in range(command.size()):
 		if !command_dict.has(command[i][0]):
-			if errors != "":
-				errors += "\n"
+			if command[i][0] == "":
+				incomplete_pipe = true
 			errors += command_not_found(command[i][0])
 			exists = false
 	if exists:
 		return CommandResult.new("", TerminationStatus.EXIT_SUCCESS)
 	else:
-		return CommandResult.new(errors, TerminationStatus.EXIT_FAILURE)
+		if incomplete_pipe:
+			return CommandResult.new("DSH: INCOMPLETE PIPE", TerminationStatus.EXIT_FAILURE)
+		else:
+			return CommandResult.new(errors, TerminationStatus.EXIT_FAILURE)
 
 
 ### COMANDOS ###
