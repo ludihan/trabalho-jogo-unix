@@ -43,7 +43,7 @@ func _read_file_content(file_path: String) -> String:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
 		return ""
-	var content = file.get_as_text()
+	var content = file.get_as_text().to_upper()
 	file.close()
 	return content
 
