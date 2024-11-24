@@ -12,7 +12,7 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventKey and event.pressed and !Global.on_fps_view:
+	if event is InputEventKey and event.pressed:
 		match event.get_keycode_with_modifiers():
 			KEY_ENTER:
 				remove_last_caret()
