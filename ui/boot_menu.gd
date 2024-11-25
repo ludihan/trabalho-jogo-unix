@@ -3,8 +3,9 @@ extends VBoxContainer
 @onready var start_label: Label = $StartLabel
 @onready var options_label: Label = $OptionsLabel
 @onready var exit_label: Label = $ExitLabel
-@onready var BLACK_LABEL := LabelSettings.new()
-@onready var WHITE_LABEL := LabelSettings.new()
+@onready var SELECTED := LabelSettings.new()
+@onready var NOT_SELECTED := LabelSettings.new()
+@onready var SELECTED_RECT := StyleBoxFlat.new()
 
 enum STATE {
 	START,
@@ -15,9 +16,15 @@ enum STATE {
 var current_state := 0
 var states := [STATE.START, STATE.OPTIONS, STATE.EXIT]
 
+
 func _ready() -> void:
-	BLACK_LABEL.font_color = Color.BLACK
-	WHITE_LABEL.font_color = Color.WHITE
+	SELECTED.font_color = Color.BLACK
+	SELECTED.font = preload("res://assets/font/PerfectDOSVGA437.ttf")
+	NOT_SELECTED.font_color = Color.WHITE
+	NOT_SELECTED.font = SELECTED.font
+	
+	SELECTED_RECT.expand_margin_left = 10
+	SELECTED_RECT.expand_margin_right = 10
 	update_labels(states[current_state])
 
 func _input(event: InputEvent) -> void:
@@ -34,13 +41,19 @@ func _input(event: InputEvent) -> void:
 	update_labels(states[current_state])
 
 func update_labels(state: STATE):
-	start_label.label_settings = WHITE_LABEL
-	options_label.label_settings = WHITE_LABEL
-	exit_label.label_settings = WHITE_LABEL
+	start_label.label_settings = NOT_SELECTED
+	options_label.label_settings = NOT_SELECTED
+	exit_label.label_settings = NOT_SELECTED
+	start_label.remove_theme_stylebox_override("normal")
+	options_label.remove_theme_stylebox_override("normal")
+	exit_label.remove_theme_stylebox_override("normal")
 	match state:
 		STATE.START:
-			start_label.label_settings = BLACK_LABEL
+			start_label.label_settings = SELECTED
+			start_label.add_theme_stylebox_override("normal", SELECTED_RECT)
 		STATE.OPTIONS:
-			options_label.label_settings = BLACK_LABEL
+			options_label.label_settings = SELECTED
+			options_label.add_theme_stylebox_override("normal", SELECTED_RECT)
 		STATE.EXIT:
-			exit_label.label_settings = BLACK_LABEL
+			exit_label.label_settings = SELECTED
+			exit_label.add_theme_stylebox_override("normal", SELECTED_RECT)
