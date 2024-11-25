@@ -1,7 +1,7 @@
 extends TextEdit
 
 const MAX_LINES: int = 50
-const CARET: String = "█"
+const CARET: String = "▌"
 var current_directory: String = "."
 var command_buffer: String = ""
 var sh: Shell = Shell.new()
@@ -13,7 +13,7 @@ func _ready():
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		match event.get_keycode_with_modifiers():
+		match event.keycode:
 			KEY_ENTER:
 				remove_last_caret()
 				if command_buffer.length() > 0:

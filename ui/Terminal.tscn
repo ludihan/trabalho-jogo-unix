@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://df5s3rqpviio2"]
 
-[ext_resource type="FontFile" uid="uid://cegr5e1kdxid" path="res://assets/font/Hack-Regular.ttf" id="1_8s2pn"]
+[ext_resource type="FontFile" uid="uid://df3sihto8owba" path="res://assets/font/PerfectDOSVGA437.ttf" id="1_hr68s"]
 [ext_resource type="Script" path="res://ui/terminal.gd" id="2_6agrd"]
 
 [node name="Terminal" type="TextEdit"]
@@ -11,8 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(0.741176, 0.717647, 0.654902, 1)
-theme_override_fonts/font = ExtResource("1_8s2pn")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("1_hr68s")
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
