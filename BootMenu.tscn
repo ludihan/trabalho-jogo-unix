@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cidsamw2yq3jf"]
 
-[ext_resource type="FontFile" uid="uid://cj1k7jbjob6ch" path="res://assets/fonts/PerfectDOSVGA437.ttf" id="1_yw2wj"]
+[ext_resource type="FontFile" uid="uid://df3sihto8owba" path="res://assets/font/PerfectDOSVGA437.ttf" id="1_yw2wj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6whvg"]
 font = ExtResource("1_yw2wj")

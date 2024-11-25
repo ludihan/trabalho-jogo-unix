@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cegr5e1kdxid"
-path="res://.godot/imported/Hack-Regular.ttf-3b1914cdc6a415da2e6eda6a20d0d6cc.fontdata"
+uid="uid://df3sihto8owba"
+path="res://.godot/imported/PerfectDOSVGA437.ttf-994494b1de84a12bee4667a9be298b24.fontdata"
 
 [deps]
 
-source_file="res://font/Hack-Regular.ttf"
-dest_files=["res://.godot/imported/Hack-Regular.ttf-3b1914cdc6a415da2e6eda6a20d0d6cc.fontdata"]
+source_file="res://assets/font/PerfectDOSVGA437.ttf"
+dest_files=["res://.godot/imported/PerfectDOSVGA437.ttf-994494b1de84a12bee4667a9be298b24.fontdata"]
 
 [params]
 
