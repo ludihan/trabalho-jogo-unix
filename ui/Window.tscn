@@ -1,24 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1gkue4sjj6gr"]
+[gd_scene load_steps=4 format=3 uid="uid://b1gkue4sjj6gr"]
 
 [ext_resource type="Script" path="res://ui/window.gd" id="1_xmyun"]
 [ext_resource type="Texture2D" uid="uid://7u1xyjp843q5" path="res://assets/close.png" id="2_ss1at"]
+[ext_resource type="Texture2D" uid="uid://b7i1nygtv86x3" path="res://assets/original/file.png" id="3_85oae"]
 
 [node name="Window" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -160.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_xmyun")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+theme_override_constants/separation = 0
+alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+[node name="Bar" type="ColorRect" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 color = Color(0, 0, 1, 1)
 
 [node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("2_ss1at")
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
+texture = ExtResource("3_85oae")
+
+[connection signal="gui_input" from="HBoxContainer/Bar" to="." method="_on_bar_gui_input"]
+[connection signal="pressed" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

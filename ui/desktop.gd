@@ -1,11 +1,10 @@
 extends Control
 
 @onready var datetime: Label = $TextureRect/Datetime
-
+const WINDOW = preload("res://ui/Window.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	datetime.text = Time.get_datetime_string_from_system(false, true)
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,4 +13,4 @@ func _process(delta: float) -> void:
 
 
 func _on_texture_button_pressed() -> void:
-	print(1)
+	get_tree().root.add_child(WINDOW.instantiate())
