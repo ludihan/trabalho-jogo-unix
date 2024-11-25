@@ -45,6 +45,7 @@ offset_left = 4.0
 offset_top = 20.0
 offset_right = 12.0
 offset_bottom = 28.0
+focus_mode = 0
 texture_normal = ExtResource("5_eth2m")
 
 [connection signal="pressed" from="TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]

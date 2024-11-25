@@ -1,5 +1,6 @@
 extends TextEdit
 
+
 const MAX_LINES: int = 50
 const CARET: String = "_"
 var current_directory: String = "."
@@ -19,6 +20,8 @@ func _input(event):
 				if command_buffer.length() > 0:
 					var command := sh.execute(command_buffer)
 					self.text += "\n" + command.output
+				else:
+					self.text += "\n"
 				prepare_prompt()
 			KEY_BACKSPACE:
 				if command_buffer.length() > 0:

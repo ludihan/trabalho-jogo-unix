@@ -2,6 +2,8 @@ extends Control
 
 @onready var datetime: Label = $TextureRect/Datetime
 const WINDOW = preload("res://ui/Window.tscn")
+const TERMINAL = preload("res://ui/Terminal.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	datetime.text = Time.get_datetime_string_from_system(false, true)

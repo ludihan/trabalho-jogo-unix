@@ -7,6 +7,10 @@ func _on_texture_button_pressed() -> void:
 var is_dragging: bool = false
 var drag_offset: Vector2
 # obrigado gpt
+
+func _ready() -> void:
+	add_child(preload("res://ui/Terminal.tscn").instantiate())
+	
 func _on_bar_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		# Start dragging on left mouse button press
