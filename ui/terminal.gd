@@ -1,7 +1,7 @@
 extends TextEdit
 
 const MAX_LINES: int = 50
-const CARET: String = "▌"
+const CARET: String = "_"
 var current_directory: String = "."
 var command_buffer: String = ""
 var sh: Shell = Shell.new()

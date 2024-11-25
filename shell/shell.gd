@@ -4,10 +4,12 @@ extends Node
 @export var level_path := "res://level/level1_root"
 @onready var vsf: VirtualFileSystem = VirtualFileSystem.new(level_path)
 
+
 enum TerminationStatus {
 	EXIT_SUCCESS,
 	EXIT_FAILURE
 }
+
 
 class CommandResult:
 	var output: String
@@ -17,8 +19,10 @@ class CommandResult:
 		self.output = _output
 		self.termination_status = _termination_status
 
+
 func _init() -> void:
 	vsf = VirtualFileSystem.new(level_path)
+
 
 func execute(commands: String) -> CommandResult:
 	var prepared_commands = prepare_commands(commands)
@@ -36,7 +40,6 @@ func execute(commands: String) -> CommandResult:
 		previous_command = command_dict[command_name].call(args, is_pipe, previous_command)
 	
 	return previous_command
-
 
 
 func prepare_commands(commands: String) -> Array:

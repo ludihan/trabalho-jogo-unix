@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://df3sihto8owba"
-path="res://.godot/imported/PerfectDOSVGA437.ttf-994494b1de84a12bee4667a9be298b24.fontdata"
+uid="uid://c53hg5h4sggrf"
+path="res://.godot/imported/m3x6.ttf-648164670c41b398c1126140008096df.fontdata"
 
 [deps]
 
-source_file="res://assets/font/PerfectDOSVGA437.ttf"
-dest_files=["res://.godot/imported/PerfectDOSVGA437.ttf-994494b1de84a12bee4667a9be298b24.fontdata"]
+source_file="res://assets/font/m3x6.ttf"
+dest_files=["res://.godot/imported/m3x6.ttf-648164670c41b398c1126140008096df.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=0
+antialiasing=1
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

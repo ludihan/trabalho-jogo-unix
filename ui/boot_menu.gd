@@ -7,11 +7,13 @@ extends VBoxContainer
 @onready var NOT_SELECTED := LabelSettings.new()
 @onready var SELECTED_RECT := StyleBoxFlat.new()
 
+
 enum STATE {
 	START,
 	OPTIONS,
 	EXIT,
 }
+
 
 var current_state := 0
 var states := [STATE.START, STATE.OPTIONS, STATE.EXIT]
@@ -19,13 +21,14 @@ var states := [STATE.START, STATE.OPTIONS, STATE.EXIT]
 
 func _ready() -> void:
 	SELECTED.font_color = Color.BLACK
-	SELECTED.font = preload("res://assets/font/PerfectDOSVGA437.ttf")
+	SELECTED.font = preload("res://assets/font/CP437.ttf")
 	NOT_SELECTED.font_color = Color.WHITE
 	NOT_SELECTED.font = SELECTED.font
 	
 	SELECTED_RECT.expand_margin_left = 10
 	SELECTED_RECT.expand_margin_right = 10
 	update_labels(states[current_state])
+
 
 func _input(event: InputEvent) -> void:
 	var states := [STATE.START, STATE.OPTIONS, STATE.EXIT]
@@ -37,8 +40,22 @@ func _input(event: InputEvent) -> void:
 			KEY_UP:
 				if current_state != 0:
 					current_state = (current_state - 1 + len(states)) % 3
+			KEY_ENTER:
+				handle_button(states[current_state])
+				
 	print(current_state)
 	update_labels(states[current_state])
+
+
+func handle_button(state: STATE):
+	match state:
+		STATE.START:
+			get_tree().change_scene_to_file("res://ui/Desktop.tscn")
+		STATE.OPTIONS:
+			print("não implementado")
+		STATE.EXIT:
+			get_tree().quit()
+
 
 func update_labels(state: STATE):
 	start_label.label_settings = NOT_SELECTED
