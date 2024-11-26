@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://ui/terminal.gd" id="2_6agrd"]
 
 [node name="Terminal" type="TextEdit"]
+show_behind_parent = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,6 +18,9 @@ theme_override_font_sizes/font_size = 16
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
+selecting_enabled = false
 wrap_mode = 1
 autowrap_mode = 1
 script = ExtResource("2_6agrd")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

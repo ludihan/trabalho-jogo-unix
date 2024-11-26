@@ -3,41 +3,26 @@ extends Node
 
 @export var level_path := "res://level/level1_root"
 @onready var vsf: VirtualFileSystem = VirtualFileSystem.new(level_path)
-
-
-enum TerminationStatus {
-	EXIT_SUCCESS,
-	EXIT_FAILURE
-}
-
-
-class CommandResult:
-	var output: String
-	var termination_status: TerminationStatus
-	
-	func _init(_output: String, _termination_status: TerminationStatus) -> void:
-		self.output = _output
-		self.termination_status = _termination_status
-
+const bin := preload("res://shell/bin.gd")
 
 func _init() -> void:
 	vsf = VirtualFileSystem.new(level_path)
 
 
+
 func execute(commands: String) -> CommandResult:
 	var prepared_commands = prepare_commands(commands)
-	print(prepared_commands)
 	var commands_exist := check_commands(prepared_commands)
-	if commands_exist.termination_status == TerminationStatus.EXIT_FAILURE:
+	if commands_exist.termination_status == CommandResult.TerminationStatus.EXIT_FAILURE:
 		return commands_exist
 
-	var previous_command: CommandResult = CommandResult.new("", TerminationStatus.EXIT_SUCCESS)
+	var previous_command: CommandResult = CommandResult.new("", CommandResult.TerminationStatus.EXIT_SUCCESS)
 	for i in range(prepared_commands.size()):
 		var command_name = prepared_commands[i][0]
 		var args = prepared_commands[i].slice(1, prepared_commands[i].size())
 		var is_pipe = (i > 0)  # Only set is_pipe to true if this is not the first command
 		
-		previous_command = command_dict[command_name].call(args, is_pipe, previous_command)
+		previous_command = bin.bin_dict[command_name].call(args, is_pipe, previous_command)
 	
 	return previous_command
 
@@ -63,75 +48,15 @@ func check_commands(command: Array) -> CommandResult:
 	var errors: String = ""
 	var incomplete_pipe := false
 	for i in range(command.size()):
-		if !command_dict.has(command[i][0]):
+		if !bin.bin_dict.has(command[i][0]):
 			if command[i][0] == "":
 				incomplete_pipe = true
 			errors += command_not_found(command[i][0])
 			exists = false
 	if exists:
-		return CommandResult.new("", TerminationStatus.EXIT_SUCCESS)
+		return CommandResult.new("", CommandResult.TerminationStatus.EXIT_SUCCESS)
 	else:
 		if incomplete_pipe:
-			return CommandResult.new("DSH: INCOMPLETE PIPE", TerminationStatus.EXIT_FAILURE)
+			return CommandResult.new("DSH: INCOMPLETE PIPE", CommandResult.TerminationStatus.EXIT_FAILURE)
 		else:
-			return CommandResult.new(errors, TerminationStatus.EXIT_FAILURE)
-
-
-### COMANDOS ###
-var command_dict := {
-	"MAN": man_bin,
-	"LS": ls_bin,
-	"CD": cd_bin,
-	"PWD": pwd_bin,
-	"ECHO": echo_bin,
-}
-
-func man_bin(args: Array, is_pipe: bool, previous_command: CommandResult) -> CommandResult:
-	print(is_pipe)
-	print("Previous Command Output:", previous_command.output)
-	print(args)
-	return CommandResult.new(
-"MAN [PROGRAMA]  MOSTRA AJUDA SOBRE COMANDOS
-LS  [DIRETORIO] MOSTRA CONTEUDO DE DIRETORIOS
-CD  DIRETORIO   MUDA DE DIRETORIO
-PWD             MOSTRA DIRETORIO ATUAL
-CAT ARQUIVO     MOSTRA / CONCATENA CONTEUDO DE ARQUIVOS\n", TerminationStatus.EXIT_SUCCESS)
-
-func ls_bin(args: Array, is_pipe: bool, previous_command: CommandResult) -> CommandResult:
-	print(is_pipe)
-	print("Previous Command Output:", previous_command.output)
-	print(args)
-	# Simulação do comando LS
-	var output = "FILES: " + (args[0] if args.size() > 0 else ".") + "\n"
-	return CommandResult.new(output, TerminationStatus.EXIT_SUCCESS)
-
-
-func cd_bin(args: Array, is_pipe: bool, previous_command: CommandResult) -> CommandResult:
-	print(is_pipe)
-	print("Previous Command Output:", previous_command.output)
-	print(args)
-	# Simulação do comando CD
-	if args.size() > 0:
-		var dir = args[0]
-		return CommandResult.new("DIR CHANGED TO: \n" + dir, TerminationStatus.EXIT_SUCCESS)
-	else:
-		return CommandResult.new("ERROR: NO DIR ESPECIFIED.\n", TerminationStatus.EXIT_FAILURE)
-
-
-func pwd_bin(args: Array, is_pipe: bool, previous_command: CommandResult) -> CommandResult:
-	print(is_pipe)
-	print("Previous Command Output:", previous_command.output)
-	print(args)
-	# Simulação do comando PWD
-	var output = "/HOME/USER\n"  # Exemplo de saída do diretório
-	return CommandResult.new(output, TerminationStatus.EXIT_SUCCESS)
-
-
-func echo_bin(args: Array, is_pipe: bool, previous_command: CommandResult) -> CommandResult:
-	print(is_pipe)
-	print("Previous Command Output:", previous_command.output)
-	print(args)
-	# Simulação do comando ECHO
-	var a = PackedStringArray(args)
-	var output = " ".join(a) + "\n"
-	return CommandResult.new(output, TerminationStatus.EXIT_SUCCESS)
+			return CommandResult.new(errors, CommandResult.TerminationStatus.EXIT_FAILURE)

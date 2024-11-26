@@ -43,7 +43,6 @@ func _input(event: InputEvent) -> void:
 			KEY_ENTER:
 				handle_button(states[current_state])
 				
-	print(current_state)
 	update_labels(states[current_state])
 
 

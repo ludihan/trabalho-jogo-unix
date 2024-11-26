@@ -1,6 +1,5 @@
 extends TextEdit
 
-
 const MAX_LINES: int = 50
 const CARET: String = "_"
 var current_directory: String = "."
@@ -12,7 +11,40 @@ func _ready():
 	prepare_prompt()
 
 
-func _input(event):
+func remove_last_caret():
+	self.text = self.text.substr(0, self.text.length() - 1)
+
+
+func update_caret(new_char: String):
+	command_buffer += new_char
+	remove_last_caret()
+	if new_char != " ":
+		self.text += new_char + CARET
+	if new_char == " ":
+		self.text += CARET
+
+
+func prepare_prompt():
+	command_buffer = ""
+	print_prompt()
+
+
+func print_prompt():
+	self.text += "$ " + CARET
+
+
+func limit_text():
+	var lines = self.text.split("\n")
+	if lines.size() > MAX_LINES:
+		var start_index = lines.size() - MAX_LINES
+		self.text = "\n".join(lines.slice(start_index, lines.size()))
+
+
+func scroll_to_bottom():
+	self.scroll_vertical = self.get_line_count()
+
+
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_ENTER:
@@ -50,36 +82,3 @@ func _input(event):
 			update_caret("_")
 		limit_text()
 		scroll_to_bottom()
-
-
-func remove_last_caret():
-	self.text = self.text.substr(0, self.text.length() - 1)
-
-
-func update_caret(new_char: String):
-	command_buffer += new_char
-	remove_last_caret()
-	if new_char != " ":
-		self.text += new_char + CARET
-	if new_char == " ":
-		self.text += CARET
-
-
-func prepare_prompt():
-	command_buffer = ""
-	print_prompt()
-
-
-func print_prompt():
-	self.text += "$ " + CARET
-
-
-func limit_text():
-	var lines = self.text.split("\n")
-	if lines.size() > MAX_LINES:
-		var start_index = lines.size() - MAX_LINES
-		self.text = "\n".join(lines.slice(start_index, lines.size()))
-
-
-func scroll_to_bottom():
-	self.scroll_vertical = self.get_line_count()

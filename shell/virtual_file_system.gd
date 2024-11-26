@@ -23,7 +23,6 @@ func _init(_level_path: String):
 	self.level_path = _level_path
 	self.file_system = _build_fs(level_path)
 	file_system.file_name = "root"
-	print(_print_tree(file_system))
 
 
 func _build_fs(_level_path: String) -> File:
