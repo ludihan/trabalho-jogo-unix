@@ -56,6 +56,7 @@ func handle_button(state: STATE):
 		STATE.START:
 			get_tree().change_scene_to_file("res://ui/intro.tscn")
 		STATE.OPTIONS:
+			$OptionsLabel/NaoImplementado.visible = true
 			error.play()
 			print("não implementado")
 		STATE.EXIT:
