@@ -20,6 +20,7 @@ var states := [STATE.START, STATE.OPTIONS, STATE.EXIT]
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	SELECTED.font_color = Color.BLACK
 	SELECTED.font = preload("res://assets/font/CP437.ttf")
 	NOT_SELECTED.font_color = Color.WHITE
@@ -49,7 +50,7 @@ func _input(event: InputEvent) -> void:
 func handle_button(state: STATE):
 	match state:
 		STATE.START:
-			get_tree().change_scene_to_file("res://ui/Desktop.tscn")
+			get_tree().change_scene_to_file("res://ui/intro.tscn")
 		STATE.OPTIONS:
 			print("não implementado")
 		STATE.EXIT:

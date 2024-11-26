@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cidsamw2yq3jf"]
 
-[ext_resource type="Script" path="res://ui/boot_menu.gd" id="1_nnhlx"]
-[ext_resource type="Shader" path="res://ui/crt.gdshader" id="2_xd18j"]
+[ext_resource type="Script" path="res://ui/boot_menu.gd" id="1_g6qls"]
+[ext_resource type="Shader" path="res://ui/crt.gdshader" id="2_v1lks"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2ek1"]
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eoa71"]
-shader = ExtResource("2_xd18j")
+shader = ExtResource("2_v1lks")
 
 [sub_resource type="QuadMesh" id="QuadMesh_try7u"]
 size = Vector2(320, 240)
@@ -48,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_nnhlx")
+script = ExtResource("1_g6qls")
 metadata/_edit_group_ = true
 
 [node name="StartLabel" type="Label" parent="BootMenu"]

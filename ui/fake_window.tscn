@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1gkue4sjj6gr"]
 
-[ext_resource type="Script" path="res://ui/fake_window.gd" id="1_hojkb"]
-[ext_resource type="Texture2D" uid="uid://7u1xyjp843q5" path="res://assets/close.png" id="2_ox1l2"]
+[ext_resource type="Script" path="res://ui/fake_window.gd" id="1_si2tu"]
+[ext_resource type="Texture2D" uid="uid://7u1xyjp843q5" path="res://assets/image/close.png" id="2_ky88n"]
 
 [node name="Window" type="VBoxContainer"]
 anchors_preset = 15
@@ -12,7 +12,7 @@ offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
-script = ExtResource("1_hojkb")
+script = ExtResource("1_si2tu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -26,7 +26,7 @@ color = Color(0, 0, 1, 1)
 
 [node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("2_ox1l2")
+texture_normal = ExtResource("2_ky88n")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/Bar" to="." method="_on_bar_gui_input"]

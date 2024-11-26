@@ -1,10 +1,13 @@
 extends Control
 
 
-const WINDOW = preload("res://ui/FakeWindow.tscn")
-const TERMINAL = preload("res://ui/Terminal.tscn")
+const WINDOW = preload("res://ui/fake_window.tscn")
+const TERMINAL = preload("res://ui/terminal.tscn")
 @onready var desktop_area: Control = $DesktopArea
 @onready var datetime: Label = $HBoxContainer/Datetime
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
