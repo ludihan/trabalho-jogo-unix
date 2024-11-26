@@ -1,5 +1,7 @@
 extends Control
 
+signal used
+
 func _on_texture_button_pressed() -> void:
 	queue_free()
 
@@ -12,6 +14,7 @@ func _on_bar_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		# Start dragging on left mouse button press
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			used.emit()
 			is_dragging = true
 			drag_offset = event.position
 		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
@@ -21,13 +24,5 @@ func _on_bar_gui_input(event: InputEvent) -> void:
 		position += event.relative
 
 
-func _on_gui_input(event: InputEvent) -> void:
-	print(1)
-
-
 func _on_close_pressed() -> void:
 	queue_free()
-
-
-func _on_focus_entered() -> void:
-	print(2)

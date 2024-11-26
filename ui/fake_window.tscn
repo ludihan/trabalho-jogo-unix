@@ -34,7 +34,5 @@ color = Color(0, 0, 1, 1)
 layout_mode = 2
 texture_normal = ExtResource("2_ky88n")
 
-[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/Bar" to="." method="_on_bar_gui_input"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]
