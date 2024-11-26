@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmlmmfbyq4xeo"]
+[gd_scene load_steps=10 format=3 uid="uid://cmlmmfbyq4xeo"]
 
 [ext_resource type="Script" path="res://ui/intro.gd" id="1_4330r"]
 [ext_resource type="AudioStream" uid="uid://b3tear1si3uom" path="res://assets/sound/intro.mp3" id="2_exb01"]
 [ext_resource type="FontFile" uid="uid://df3sihto8owba" path="res://assets/font/CP437.ttf" id="2_m6wal"]
+[ext_resource type="Shader" path="res://ui/crt.gdshader" id="4_js2jl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owbqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -12,6 +13,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20wfd"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eoa71"]
+shader = ExtResource("4_js2jl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_try7u"]
+size = Vector2(320, 240)
+center_offset = Vector3(160, 120, 0)
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -48,5 +56,11 @@ virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 autowrap_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_eoa71")
+mesh = SubResource("QuadMesh_try7u")
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

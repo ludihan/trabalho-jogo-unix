@@ -7,8 +7,6 @@ extends Control
 func _ready() -> void:
 	text_edit.scroll_fit_content_height = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	text_edit.text += junk_generator()
 
@@ -19,5 +17,4 @@ func junk_generator() -> String:
 	return a
 
 func _on_audio_stream_player_finished() -> void:
-	print(1)
 	get_tree().change_scene_to_file("res://ui/dekstop.tscn")
