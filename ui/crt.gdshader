@@ -4,7 +4,7 @@ render_mode unshaded, skip_vertex_transform;
 const float resx = 320.0;
 const float resy = 240.0;
 const float curvature = 100.0;
-const float vignette_multiplier = 1.0;
+const float vignette_multiplier = .5;
 
 uniform sampler2D screen_texture: hint_screen_texture;
 

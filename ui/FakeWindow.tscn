@@ -28,5 +28,6 @@ color = Color(0, 0, 1, 1)
 layout_mode = 2
 texture_normal = ExtResource("2_ox1l2")
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/Bar" to="." method="_on_bar_gui_input"]
 [connection signal="pressed" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

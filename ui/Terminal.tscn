@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://df5s3rqpviio2"]
+[gd_scene load_steps=5 format=3 uid="uid://df5s3rqpviio2"]
 
 [ext_resource type="FontFile" uid="uid://c53hg5h4sggrf" path="res://assets/font/m3x6.ttf" id="1_pfu4h"]
 [ext_resource type="Script" path="res://ui/terminal.gd" id="2_6agrd"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajvho"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0mn6"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Terminal" type="TextEdit"]
-show_behind_parent = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,8 +18,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(0.741176, 0.717647, 0.654902, 1)
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("1_pfu4h")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajvho")
+theme_override_styles/focus = SubResource("StyleBoxFlat_n0mn6")
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false

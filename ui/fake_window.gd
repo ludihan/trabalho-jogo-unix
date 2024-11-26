@@ -19,3 +19,7 @@ func _on_bar_gui_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and is_dragging:
 		# Dragging logic
 		position += event.relative
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	print(get_tree_string_pretty())

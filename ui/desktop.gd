@@ -1,15 +1,39 @@
 extends Control
 
-@onready var datetime: Label = $TextureRect/Datetime
+
 const WINDOW = preload("res://ui/FakeWindow.tscn")
 const TERMINAL = preload("res://ui/Terminal.tscn")
+@onready var desktop_area: Control = $DesktopArea
+@onready var datetime: Label = $HBoxContainer/Datetime
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	datetime.text = Time.get_datetime_string_from_system(false, true)
 
 
-func _on_terminal_app_pressed() -> void:
+func instatentiate_window(resource: PackedScene) -> void:
 	var window := WINDOW.instantiate()
-	window.add_child(TERMINAL.instantiate())
-	add_child(window)
+	var thing := resource.instantiate()
+	window.add_child(thing)
+	desktop_area.add_child(window)
+	thing.grab_focus()
+	
+
+func _on_terminal_app_pressed() -> void:
+	instatentiate_window(TERMINAL)
+
+
+func _on_man_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_level_1_app_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_level_2_app_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_turn_off_button_pressed() -> void:
+	pass # Replace with function body.

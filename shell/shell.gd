@@ -18,6 +18,8 @@ func execute(commands: String) -> CommandResult:
 
 	var previous_command: CommandResult = CommandResult.new("", CommandResult.TerminationStatus.EXIT_SUCCESS)
 	for i in range(prepared_commands.size()):
+		if previous_command.termination_status == CommandResult.TerminationStatus.EXIT_FAILURE:
+			return previous_command
 		var command_name = prepared_commands[i][0]
 		var args = prepared_commands[i].slice(1, prepared_commands[i].size())
 		var is_pipe = (i > 0)  # Only set is_pipe to true if this is not the first command
