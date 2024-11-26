@@ -6,6 +6,7 @@ extends VBoxContainer
 @onready var SELECTED := LabelSettings.new()
 @onready var NOT_SELECTED := LabelSettings.new()
 @onready var SELECTED_RECT := StyleBoxFlat.new()
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 enum STATE {
@@ -52,6 +53,8 @@ func handle_button(state: STATE):
 		STATE.START:
 			get_tree().change_scene_to_file("res://ui/intro.tscn")
 		STATE.OPTIONS:
+			audio_stream_player.stream = load("res://assets/sound/kenney-interface-sounds/error_006.ogg")
+			audio_stream_player.play()
 			print("não implementado")
 		STATE.EXIT:
 			get_tree().quit()
