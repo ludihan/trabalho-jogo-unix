@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://lph1o4dijnjc"]
+[gd_scene load_steps=8 format=3 uid="uid://lph1o4dijnjc"]
 
 [ext_resource type="Script" path="res://ui/desktop.gd" id="1_c80xl"]
 [ext_resource type="Texture2D" uid="uid://d36xin7oghlxn" path="res://assets/desktop.png" id="1_jmpin"]
 [ext_resource type="FontFile" uid="uid://c53hg5h4sggrf" path="res://assets/font/m3x6.ttf" id="4_n1y4k"]
+[ext_resource type="Shader" path="res://ui/crt.gdshader" id="5_5nmnm"]
 [ext_resource type="Texture2D" uid="uid://g0o0huuel6t5" path="res://assets/scroll.png" id="5_eth2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obpy6"]
+shader = ExtResource("5_5nmnm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tc6kc"]
+size = Vector2(320, 240)
+center_offset = Vector3(160, 120, 0)
 
 [node name="Desktop" type="Control"]
 layout_mode = 3
@@ -47,5 +55,11 @@ offset_right = 12.0
 offset_bottom = 28.0
 focus_mode = 0
 texture_normal = ExtResource("5_eth2m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_obpy6")
+mesh = SubResource("QuadMesh_tc6kc")
 
 [connection signal="pressed" from="TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]
