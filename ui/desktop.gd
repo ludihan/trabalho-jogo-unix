@@ -32,15 +32,8 @@ func _on_terminal_app_pressed() -> void:
 
 
 func _on_man_button_pressed() -> void:
-	tutorial_label.queue_free()
-
-
-func _on_level_1_app_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_level_2_app_pressed() -> void:
-	pass # Replace with function body.
+	if tutorial_label != null:
+		tutorial_label.queue_free()
 
 
 func _on_turn_off_button_pressed() -> void:
