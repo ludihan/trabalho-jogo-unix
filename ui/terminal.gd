@@ -80,7 +80,6 @@ func _on_gui_input(event: InputEvent) -> void:
 					update_caret("|")
 				KEY_MINUS:
 					update_caret("_")
-		print(event)
 		if event.keycode == clamp(event.keycode, 64, 90) or event.keycode == clamp(event.keycode, 48, 57):
 			update_caret(OS.get_keycode_string(event.keycode))
 

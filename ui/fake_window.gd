@@ -22,4 +22,12 @@ func _on_bar_gui_input(event: InputEvent) -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	print(get_tree_string_pretty())
+	print(1)
+
+
+func _on_close_pressed() -> void:
+	queue_free()
+
+
+func _on_focus_entered() -> void:
+	print(2)

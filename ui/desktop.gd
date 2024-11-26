@@ -18,10 +18,14 @@ func _process(delta: float) -> void:
 func instatentiate_window(resource: PackedScene) -> void:
 	var window := WINDOW.instantiate()
 	var thing := resource.instantiate()
-	window.add_child(thing)
+	window.get_node("VBoxContainer").add_child(thing)
+
 	desktop_area.add_child(window)
 	thing.grab_focus()
 	
+func _on_window_focused(focused_window):
+	# Raise the focused window to the top
+	focused_window.raise()
 
 func _on_terminal_app_pressed() -> void:
 	instatentiate_window(TERMINAL)
