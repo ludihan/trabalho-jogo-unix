@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cidsamw2yq3jf"]
+[gd_scene load_steps=9 format=3 uid="uid://cidsamw2yq3jf"]
 
+[ext_resource type="FontFile" uid="uid://c53hg5h4sggrf" path="res://assets/font/m3x6.ttf" id="1_2maqq"]
 [ext_resource type="Script" path="res://ui/boot_menu.gd" id="1_g6qls"]
 [ext_resource type="AudioStream" uid="uid://b6clwcdsegju" path="res://assets/sound/kenney-interface-sounds/error_006.ogg" id="2_getiu"]
 [ext_resource type="Shader" path="res://ui/crt.gdshader" id="2_v1lks"]
@@ -72,24 +73,19 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NaoImplementado" type="Label" parent="BootMenu/OptionsLabel"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.222
-anchor_right = 1.857
-anchor_bottom = 1.0
-offset_left = 0.0139999
-offset_right = 0.00899506
-theme_override_font_sizes/font_size = 10
-text = "(não implementado)"
-
 [node name="ExitLabel" type="Label" parent="BootMenu"]
 texture_filter = 1
 layout_mode = 2
 text = "Exit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NaoImplementado" type="Label" parent="BootMenu"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2maqq")
+theme_override_font_sizes/font_size = 16
+text = "(nao implementado)"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -59,6 +59,6 @@ func check_commands(command: Array) -> CommandResult:
 		return CommandResult.new("", CommandResult.TerminationStatus.EXIT_SUCCESS)
 	else:
 		if incomplete_pipe:
-			return CommandResult.new("DSH: INCOMPLETE PIPE", CommandResult.TerminationStatus.EXIT_FAILURE)
+			return CommandResult.new("DSH: INCOMPLETE PIPE\n", CommandResult.TerminationStatus.EXIT_FAILURE)
 		else:
 			return CommandResult.new(errors, CommandResult.TerminationStatus.EXIT_FAILURE)
