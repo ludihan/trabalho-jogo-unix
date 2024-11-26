@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cidsamw2yq3jf"]
+[gd_scene load_steps=8 format=3 uid="uid://cidsamw2yq3jf"]
 
 [ext_resource type="Script" path="res://ui/boot_menu.gd" id="1_g6qls"]
+[ext_resource type="AudioStream" uid="uid://b6clwcdsegju" path="res://assets/sound/kenney-interface-sounds/error_006.ogg" id="2_getiu"]
 [ext_resource type="Shader" path="res://ui/crt.gdshader" id="2_v1lks"]
+[ext_resource type="AudioStream" uid="uid://cjy8lckpo0ke2" path="res://assets/sound/kenney-interface-sounds/tick_001.ogg" id="3_gc0q5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2ek1"]
 expand_margin_left = 10.0
@@ -51,7 +53,11 @@ size_flags_vertical = 4
 script = ExtResource("1_g6qls")
 metadata/_edit_group_ = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BootMenu"]
+[node name="error" type="AudioStreamPlayer" parent="BootMenu"]
+stream = ExtResource("2_getiu")
+
+[node name="tick" type="AudioStreamPlayer" parent="BootMenu"]
+stream = ExtResource("3_gc0q5")
 
 [node name="StartLabel" type="Label" parent="BootMenu"]
 layout_mode = 2
