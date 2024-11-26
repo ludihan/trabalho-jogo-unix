@@ -121,5 +121,4 @@ mesh = SubResource("QuadMesh_tc6kc")
 [connection signal="pressed" from="VBoxContainer/ManButton" to="." method="_on_man_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TerminalApp" to="." method="_on_terminal_app_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level1App" to="." method="_on_level_1_app_pressed"]
-[connection signal="pressed" from="VBoxContainer/Level2App" to="." method="_on_level_2_app_pressed"]
 [connection signal="pressed" from="VBoxContainer/TurnOffButton" to="." method="_on_turn_off_button_pressed"]
